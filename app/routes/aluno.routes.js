@@ -1,5 +1,5 @@
 module.exports = app => {
-    const customers = require("../controllers/customer.controller.js");
+    const customers = require("../controllers/Aluno.controller.js");
   
     // Create a new Customer
     /*app.post("/customers", customers.create);

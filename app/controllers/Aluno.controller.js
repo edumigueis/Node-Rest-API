@@ -1,4 +1,4 @@
-const Customer = require("../models/customer.model.js");
+const Customer = require("../models/Aluno.model.js");
 
 // Create and Save a new Customer
 exports.create = (req, res) => {

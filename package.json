@@ -1,0 +1,33 @@
+{
+  "name": "node-rest-api",
+  "version": "1.0.0",
+  "description": "Node.js Restful CRUD API with Node.js, Express and SQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edumigueis/Node-Rest-API.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mysql",
+    "restapi",
+    "api",
+    "expressJS",
+    "node"
+  ],
+  "author": "Eduardo Migueis and Rodrigo Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edumigueis/Node-Rest-API/issues"
+  },
+  "homepage": "https://github.com/edumigueis/Node-Rest-API#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

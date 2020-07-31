@@ -1,27 +1,32 @@
-/*const sql = require("./db.js");
+const sql = require("./db.js");
 
-// constructor
-const Customer = function(customer) {
-  this.email = customer.email;
-  this.name = customer.name;
-  this.active = customer.active;
+// Construtor
+const Aluno = function (aluno) {
+  this.ra = aluno.ra;
+  this.nome = aluno.nome;
 };
 
-Customer.create = (newCustomer, result) => {
-  sql.query("INSERT INTO customers SET ?", newCustomer, (err, res) => {
+Aluno.create = (newAluno, result) => {
+  sql.query("INSERT INTO alunos SET ?", newAluno, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created customer: ", { id: res.insertId, ...newCustomer });
-    result(null, { id: res.insertId, ...newCustomer });
+    console.log("created aluno: ", {
+      ra: res.insertRA,
+      ...newAluno
+    });
+    result(null, {
+      id: res.insertRA,
+      ...newAluno
+    });
   });
 };
 
-Customer.findById = (customerId, result) => {
-  sql.query(`SELECT * FROM customers WHERE id = ${customerId}`, (err, res) => {
+Aluno.findByRA = (alunoRA, result) => {
+  sql.query(`SELECT * FROM alunos WHERE id = ${alunoRA}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -29,33 +34,35 @@ Customer.findById = (customerId, result) => {
     }
 
     if (res.length) {
-      console.log("found customer: ", res[0]);
+      console.log("Aluno encontrado: ", res[0]);
       result(null, res[0]);
       return;
     }
 
-    // not found Customer with the id
-    result({ kind: "not_found" }, null);
+    // Não achou o aluno com o ra
+    result({
+      kind: "not_found"
+    }, null);
   });
 };
 
-Customer.getAll = result => {
-  sql.query("SELECT * FROM customers", (err, res) => {
+Aluno.getAll = result => {
+  sql.query("SELECT * FROM alunos", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("customers: ", res);
+    console.log("alunos: ", res);
     result(null, res);
   });
 };
 
-Customer.updateById = (id, customer, result) => {
+Aluno.updateByRA = (ra, aluno, result) => {
   sql.query(
-    "UPDATE customers SET email = ?, name = ?, active = ? WHERE id = ?",
-    [customer.email, customer.name, customer.active, id],
+    "UPDATE alunos SET nome = ? WHERE ra = ?",
+    [aluno.nome, ra],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -64,19 +71,27 @@ Customer.updateById = (id, customer, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Customer with the id
-        result({ kind: "not_found" }, null);
+        // não achou o aluno com esse ra
+        result({
+          kind: "not_found"
+        }, null);
         return;
       }
 
-      console.log("updated customer: ", { id: id, ...customer });
-      result(null, { id: id, ...customer });
+      console.log("updated aluno: ", {
+        id: id,
+        ...aluno
+      });
+      result(null, {
+        id: id,
+        ...aluno
+      });
     }
   );
 };
 
-Customer.remove = (id, result) => {
-  sql.query("DELETE FROM customers WHERE id = ?", id, (err, res) => {
+Aluno.remove = (ra, result) => {
+  sql.query("DELETE FROM alunos WHERE ra = ?", ra, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -84,27 +99,29 @@ Customer.remove = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found Customer with the id
-      result({ kind: "not_found" }, null);
+      // não achou o aluno com esse ra
+      result({
+        kind: "not_found"
+      }, null);
       return;
     }
 
-    console.log("deleted customer with id: ", id);
+    console.log("Aluno com ra: ", ra, " foi deletado");
     result(null, res);
   });
 };
 
-Customer.removeAll = result => {
-  sql.query("DELETE FROM customers", (err, res) => {
+Aluno.removeAll = result => {
+  sql.query("DELETE FROM alunos", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} customers`);
+    console.log(`deleted ${res.affectedRows} alunos`);
     result(null, res);
   });
 };
 
-module.exports = Customer;*/
+module.exports = Aluno;

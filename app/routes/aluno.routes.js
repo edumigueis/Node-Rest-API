@@ -1,21 +1,21 @@
 module.exports = app => {
-    const customers = require("../controllers/Aluno.controller.js");
-  
-    // Create a new Customer
-    /*app.post("/customers", customers.create);
-  
-    // Retrieve all Customers
-    app.get("/customers", customers.findAll);
-  
-    // Retrieve a single Customer with customerId
-    app.get("/customers/:customerId", customers.findOne);
-  
-    // Update a Customer with customerId
-    app.put("/customers/:customerId", customers.update);
-  
-    // Delete a Customer with customerId
-    app.delete("/customers/:customerId", customers.delete);
-  
-    // Create a new Customer
-    app.delete("/customers", customers.deleteAll);*/
-  };
+  const alunos = require("../controllers/Aluno.controller.js");
+
+  // Cria um novo aluno
+  app.post("/alunos", alunos.create);
+
+  // Pega todos os alunos na tabela
+  app.get("/alunos", alunos.findAll);
+
+  // Pega só um aluno da tabela
+  app.get("/alunos/:alunoRA", alunos.findOne);
+
+  // Pega todos os alunos da tabela
+  app.put("/alunos/:alunoRA", alunos.update);
+
+  // Deleta os alunos com ra
+  app.delete("/alunos/:alunoRA", alunos.delete);
+
+  // Create a new Customer
+  app.delete("/alunos", alunos.deleteAll);
+};

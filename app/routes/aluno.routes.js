@@ -8,13 +8,13 @@ module.exports = app => {
   app.get("/alunos", alunos.findAll);
 
   // Pega só um aluno da tabela
-  app.get("/alunos/:alunoRA", alunos.findOne);
+  app.get("/alunos/:ra", alunos.findOne);
 
   // Pega todos os alunos da tabela
-  app.put("/alunos/:alunoRA", alunos.update);
+  app.put("/alunos/:ra", alunos.update);
 
   // Deleta os alunos com ra
-  app.delete("/alunos/:alunoRA", alunos.delete);
+  app.delete("/alunos/:ra", alunos.delete);
 
   // Deleta todas as disciplinas
   app.delete("/alunos", alunos.deleteAll);

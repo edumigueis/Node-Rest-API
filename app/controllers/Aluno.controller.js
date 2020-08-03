@@ -38,7 +38,7 @@ exports.findAll = (req, res) => {
 
 // Achar aluno com ra especifico
 exports.findOne = (req, res) => {
-  Aluno.findById(req.params.ra, (err, data) => {
+  Aluno.findByRA(req.params.ra, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

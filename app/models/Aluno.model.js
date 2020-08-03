@@ -19,14 +19,14 @@ Aluno.create = (newAluno, result) => {
       ...newAluno
     });
     result(null, {
-      id: res.insertRA,
+      ra: res.insertRA,
       ...newAluno
     });
   });
 };
 
 Aluno.findByRA = (alunoRA, result) => {
-  sql.query(`SELECT * FROM alunos WHERE id = ${alunoRA}`, (err, res) => {
+  sql.query(`SELECT * FROM alunos WHERE ra = ${alunoRA}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -79,11 +79,11 @@ Aluno.updateByRA = (ra, aluno, result) => {
       }
 
       console.log("updated aluno: ", {
-        id: id,
+        ra: ra,
         ...aluno
       });
       result(null, {
-        id: id,
+        ra: ra,
         ...aluno
       });
     }

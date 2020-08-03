@@ -27,15 +27,18 @@ Aluno.create = (newAluno, result) => {
 
 Aluno.findByRA = (alunoRA, result) => {
   sql.query(`SELECT * FROM alunos WHERE ra = ${alunoRA}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
+    console.log(res.recordset.length)
+    if (res.recordset.length > 0) {
+      console.log("Aluno encontrado: ", res);
+      result(null, res[0]);
       return;
     }
 
-    if (res.length) {
-      console.log("Aluno encontrado: ", res[0]);
-      result(null, res[0]);
+
+    if (err) {
+      console.log(alunoRA);
+      console.log("error: ", err);
+      result(err, null);
       return;
     }
 
@@ -70,7 +73,7 @@ Aluno.updateByRA = (ra, aluno, result) => {
         return;
       }
 
-      if (res.affectedRows == 0) {
+      if (res.recordset.length == 0) {
         // não achou o aluno com esse ra
         result({
           kind: "not_found"

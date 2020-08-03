@@ -10,7 +10,7 @@ module.exports = app => {
   // Pega só um aluno da tabela
   app.get("/alunos/:ra", alunos.findOne);
 
-  // Pega todos os alunos da tabela
+  // Altera todos os alunos da tabela
   app.put("/alunos/:ra", alunos.update);
 
   // Deleta os alunos com ra

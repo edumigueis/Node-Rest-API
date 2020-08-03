@@ -16,6 +16,6 @@ module.exports = app => {
   // Deleta os alunos com ra
   app.delete("/alunos/:alunoRA", alunos.delete);
 
-  // Create a new Customer
+  // Deleta todas as disciplinas
   app.delete("/alunos", alunos.deleteAll);
 };

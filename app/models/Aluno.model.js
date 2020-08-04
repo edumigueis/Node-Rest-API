@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const Matricula = require("./Matricula.model.js");
 
 // Construtor
 const Aluno = function (aluno) {
@@ -126,5 +127,36 @@ Aluno.removeAll = result => {
     result(null, res);
   });
 };
-
+Aluno.insertAndUpdate = (ra, codigo, nota, frequencia) => {
+  if (Matricula.findByRA(ra) == null) {
+    console.log("Essa matrícula não existe");
+    return;
+  }
+  if (Aluno.findByRA(ra) == null) {
+    console.log("Esse aluno não existe");
+    return;
+  }
+  if (Disciplina.findByCOD == null) {
+    console.log("Essa disciplina não existe");
+    return;
+  }
+  sql.query("DELETE FROM MATRICULAS WHERE RA=? AND COD=?", [ra, codigo], (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Matrícula deletada com sucesso!")
+    result(null, res);
+  })
+  sql.query("INSERT INTO RESULTADOS VALUES(" + ra + ", " + codigo + ", " + nota + ", " + ", " + frequencia + ")", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Resultado inserido com sucesso com sucesso!")
+    result(null, res);
+  })
+}
 module.exports = Aluno;

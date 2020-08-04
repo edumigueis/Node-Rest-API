@@ -6,6 +6,7 @@ const Matricula = function (matricula) {
   this.cod = matricula.cod;
 };
 
+
 Matricula.create = (newMatricula, result) => {
   sql.query("INSERT INTO matriculas SET ?", newMatricula, (err, res) => {
     if (err) {

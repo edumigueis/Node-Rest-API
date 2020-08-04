@@ -11,7 +11,7 @@ exports.create = (req, res) => {
 
   // Cria um Disciplina
   const disciplina = new Disciplina({
-    id: req.body.id,
+    cod: req.body.cod,
     nome: req.body.nome,
   });
 
@@ -36,17 +36,17 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Achar disciplina com id especifico
+// Achar disciplina com cod especifico
 exports.findOne = (req, res) => {
-  Disciplina.findById(req.params.id, (err, data) => {
+  Disciplina.findByCod(req.params.cod, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Não foi possível encontar o disciplina com id ${req.params.id}.`
+          message: `Não foi possível encontar o disciplina com cod ${req.params.cod}.`
         });
       } else {
         res.status(500).send({
-          message: "Erro ao buscar o disciplina com id " + req.params.id
+          message: "Erro ao buscar o disciplina com cod " + req.params.cod
         });
       }
     } else res.send(data);
@@ -63,17 +63,17 @@ exports.update = (req, res) => {
   }
 
   Disciplina.updateByRA(
-    req.params.id,
+    req.params.cod,
     new Disciplina(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Não foi possível encontrar disciplina com id ${req.params.id}.`
+            message: `Não foi possível encontrar disciplina com cod ${req.params.cod}.`
           });
         } else {
           res.status(500).send({
-            message: "Erro ao atualizar disciplina com id " + req.params.id
+            message: "Erro ao atualizar disciplina com cod " + req.params.cod
           });
         }
       } else res.send(data);
@@ -83,15 +83,15 @@ exports.update = (req, res) => {
 
 // Deleta disciplina com id especifico
 exports.delete = (req, res) => {
-  Disciplina.remove(req.params.id, (err, data) => {
+  Disciplina.remove(req.params.cod, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Não foi possível encontrar disciplina com id ${req.params.disciplinaId}.`
+          message: `Não foi possível encontrar disciplina com cod ${req.params.disciplinaCOD}.`
         });
       } else {
         res.status(500).send({
-          message: "Erro ao deletar disciplina com id " + req.params.disciplinaId
+          message: "Erro ao deletar disciplina com cod " + req.params.disciplinaCOD
         });
       }
     } else res.send({

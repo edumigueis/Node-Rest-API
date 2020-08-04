@@ -25,8 +25,8 @@ Disciplina.create = (newDisciplina, result) => {
   });
 };
 
-Disciplina.findByRA = (disciplinaRA, result) => {
-  sql.query(`SELECT * FROM disciplinas WHERE id = ${disciplinaRA}`, (err, res) => {
+Disciplina.findByCod = (disciplinaCOD, result) => {
+  sql.query(`SELECT * FROM disciplinas WHERE id = ${disciplinaCOD}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

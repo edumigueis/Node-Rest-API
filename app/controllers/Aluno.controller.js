@@ -1,4 +1,6 @@
 const Aluno = require("../models/Aluno.model.js");
+const Resultado = require("../models/Resultado.model.js");
+const Matricula = require("../models/Matricula.model.js");
 
 // Cria e salva um novo aluno
 exports.create = (req, res) => {

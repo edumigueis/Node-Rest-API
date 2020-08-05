@@ -51,7 +51,7 @@ Aluno.findByRA = (alunoRA, result) => {
 };
 
 Aluno.getAll = result => {
-  sql.query("SELECT * FROM alunos", (err, res) => {
+  sql.query("SELECT * FROM alunosED", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -65,7 +65,7 @@ Aluno.getAll = result => {
 
 Aluno.updateByRA = (ra, aluno, result) => {
   sql.query(
-    "UPDATE alunos SET nome = ? WHERE ra = ?",
+    "UPDATE alunosED SET nome = ? WHERE ra = ?",
     [aluno.nome, ra],
     (err, res) => {
       if (err) {
@@ -95,7 +95,7 @@ Aluno.updateByRA = (ra, aluno, result) => {
 };
 
 Aluno.remove = (ra, result) => {
-  sql.query("DELETE FROM alunos WHERE ra = ?", ra, (err, res) => {
+  sql.query("DELETE FROM alunosED WHERE ra = ?", ra, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -116,7 +116,7 @@ Aluno.remove = (ra, result) => {
 };
 
 Aluno.removeAll = result => {
-  sql.query("DELETE FROM alunos", (err, res) => {
+  sql.query("DELETE FROM alunosED", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

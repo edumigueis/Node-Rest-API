@@ -51,7 +51,7 @@ exports.findOne = (req, res) => {
           message: "Erro ao busar o aluno com ra " + req.params.ra
         });
       }
-    } else res.send(data.recordset);
+    } else res.send(data);
   });
 };
 

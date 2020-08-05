@@ -83,7 +83,7 @@ exports.update = (req, res) => {
 
 // Deleta matricula com ra especifico
 exports.delete = (req, res) => {
-  Matricula.remove(req.params.ra, (err, data) => {
+  Matricula.remove(req.params.cod,req.params.ra, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

@@ -8,7 +8,7 @@ const Matricula = function (matricula) {
 
 
 Matricula.create = (newMatricula, result) => {
-  sql.query("INSERT INTO matriculasED SET ?", newMatricula, (err, res) => {
+  sql.query("INSERT INTO matriculasED VALUES (?,?)", newMatricula.ra, newMatricula.cod, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

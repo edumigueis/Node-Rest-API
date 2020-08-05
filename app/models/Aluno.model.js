@@ -127,7 +127,7 @@ Aluno.removeAll = result => {
     result(null, res);
   });
 };
-Aluno.insertAndUpdate = (ra, codigo, nota, frequencia) => {
+/*Aluno.insertAndUpdate = (ra, codigo, nota, frequencia) => {
   if (Matricula.findByRA(ra) == null) {
     console.log("Essa matrícula não existe");
     return;
@@ -158,5 +158,5 @@ Aluno.insertAndUpdate = (ra, codigo, nota, frequencia) => {
     console.log("Resultado inserido com sucesso com sucesso!")
     result(null, res);
   })
-}
+}*/
 module.exports = Aluno;

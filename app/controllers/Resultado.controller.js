@@ -1,4 +1,7 @@
 const Resultado = require("../models/Resultado.model.js");
+const Matricula = require("../models/Matricula.model.js");
+const Aluno = require("../models/Aluno.model.js");
+const Disciplina = require("../models/Disciplina.model.js");
 
 // Cria e salva um novo resultado
 exports.create = (req, res) => {
@@ -8,14 +11,35 @@ exports.create = (req, res) => {
       message: "Conteúdo não pode estar vazio"
     });
   }
-
+  
   // Cria um Resultado
   const resultado = new Resultado({
     ra: req.body.ra,
     nome: req.body.nome,
     nota: req.body.nota,
     frequencia: req.body.frequencia,
+    cod: req.body.cod,
   });
+
+  Aluno.findByRA(resultado.ra, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "Este aluno não existe."
+      });
+      return;
+    }
+  });
+
+  Disciplina.remove(resultado.cod, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "Esta disciplina não existe."
+      });
+      return;
+    }
+  });
+
+  /*Matricula.findByRA("")*/
 
   // Salva Resultado no banco de dados
   Resultado.create(resultado, (err, data) => {

@@ -8,7 +8,7 @@ const Matricula = function (matricula) {
 
 
 Matricula.create = (newMatricula, result) => {
-  sql.query("INSERT INTO matriculas SET ?", newMatricula, (err, res) => {
+  sql.query("INSERT INTO matriculasED SET ?", newMatricula, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -48,7 +48,7 @@ Matricula.findByRA = (matriculaRA, cod, result) => {
 };
 
 Matricula.getAll = result => {
-  sql.query("SELECT * FROM matriculas", (err, res) => {
+  sql.query("SELECT * FROM matriculasED", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -62,7 +62,7 @@ Matricula.getAll = result => {
 
 Matricula.updateByRA = (ra, matricula, result) => {
   sql.query(
-    "UPDATE matriculas SET COD = ? WHERE RA = ?",
+    "UPDATE matriculasED SET COD = ? WHERE RA = ?",
     [matricula.cod, ra],
     (err, res) => {
       if (err) {
@@ -113,7 +113,7 @@ Matricula.remove = (cod, ra, result) => {
 };
 
 Matricula.removeAll = result => {
-  sql.query("DELETE FROM matriculas", (err, res) => {
+  sql.query("DELETE FROM matriculasED", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

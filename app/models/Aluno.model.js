@@ -27,7 +27,7 @@ Aluno.create = (newAluno, result) => {
 };
 
 Aluno.findByRA = (alunoRA, result) => {
-  sql.query(`SELECT * FROM alunos WHERE ra = ${alunoRA}`, (err, res) => {
+  sql.query(`SELECT * FROM alunosED WHERE ra = ${alunoRA}`, (err, res) => {
     console.log(res.recordset.length)
     if (res.recordset.length > 0) {
       console.log("Aluno encontrado: ", res);

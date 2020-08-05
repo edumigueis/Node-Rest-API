@@ -31,7 +31,7 @@ Aluno.findByRA = (alunoRA, result) => {
     console.log(res.recordset.length)
     if (res.recordset.length > 0) {
       console.log("Aluno encontrado: ", res);
-      result(null, res[0]);
+      result(null, res.recordset[0]);
       return;
     }
 

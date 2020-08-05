@@ -25,6 +25,12 @@ PRIMARY KEY (RA,Cod),
 FOREIGN KEY (RA)				
 REFERENCES AlunosED(RA),		
 FOREIGN KEY (Cod)				
-REFERENCES Disciplinas(Cod))		
+REFERENCES Disciplinas(Cod))	
+
+select * from AlunosED
+select * from Disciplinas	
+select * from MatriculasED	
+select * from Resultados	
+
 
 						

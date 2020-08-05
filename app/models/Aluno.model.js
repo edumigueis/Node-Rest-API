@@ -1,5 +1,5 @@
 const sql = require("./db.js");
-const Matricula = require("./Matricula.model.js");
+/*const Matricula = require("./Matricula.model.js");*/
 
 // Construtor
 const Aluno = function (aluno) {

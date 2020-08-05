@@ -8,7 +8,7 @@ const Aluno = function (aluno) {
 };
 
 Aluno.create = (newAluno, result) => {
-  sql.query("INSERT INTO alunos SET ?", newAluno, (err, res) => {
+  sql.query("INSERT INTO alunos VALUES("+newAluno.ra+","+newAluno.nome+")", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

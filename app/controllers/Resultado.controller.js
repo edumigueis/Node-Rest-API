@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     }
   });
 
-  Disciplina.remove(resultado.cod, (err, data) => {
+  Matricula.remove(resultado.cod, resultado.ra, (err, data) => {
     if (err) {
       res.status(500).send({
         message: err.message || "Esta disciplina não existe."

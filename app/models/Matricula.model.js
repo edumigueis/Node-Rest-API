@@ -91,8 +91,8 @@ Matricula.updateByRA = (ra, matricula, result) => {
   );
 };
 
-Matricula.remove = (ra, result) => {
-  sql.query("DELETE FROM matriculas WHERE ra = ?", ra, (err, res) => {
+Matricula.remove = (cod, ra, result) => {
+  sql.query("DELETE FROM matriculas WHERE ra = ? and cod = ?", ra, cod, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

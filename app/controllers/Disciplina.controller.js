@@ -21,7 +21,7 @@ exports.create = (req, res) => {
       res.status(500).send({
         message: err.message || "Erro ao criar disciplina."
       });
-    else res.send(data);
+    else res.send(data.recordset);
   });
 };
 
@@ -32,7 +32,7 @@ exports.findAll = (req, res) => {
       res.status(500).send({
         message: err.message || "Erro ao buscar disciplinas."
       });
-    else res.send(data);
+    else res.send(data.recordset);
   });
 };
 
@@ -49,7 +49,7 @@ exports.findOne = (req, res) => {
           message: "Erro ao buscar o disciplina com cod " + req.params.cod
         });
       }
-    } else res.send(data);
+    } else res.send(data.recordset);
   });
 };
 
@@ -76,7 +76,7 @@ exports.update = (req, res) => {
             message: "Erro ao atualizar disciplina com cod " + req.params.cod
           });
         }
-      } else res.send(data);
+      } else res.send(data.recordset);
     }
   );
 };

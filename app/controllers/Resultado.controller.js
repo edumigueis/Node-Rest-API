@@ -54,7 +54,7 @@ exports.create = (req, res) => {
       res.status(500).send({
         message: err.message || "Erro ao criar resultado.",
       });
-    else res.send(data);
+    else res.send(data.recordset);
   });
 };
 
@@ -65,7 +65,7 @@ exports.findAll = (req, res) => {
       res.status(500).send({
         message: err.message || "Erro ao buscar resultados.",
       });
-    else res.send(data);
+    else res.send(data.recordset);
   });
 };
 
@@ -82,7 +82,7 @@ exports.findOne = (req, res) => {
           message: "Erro ao busar o resultado com ra " + req.params.ra,
         });
       }
-    } else res.send(data);
+    } else res.send(data.recordset);
   });
 };
 

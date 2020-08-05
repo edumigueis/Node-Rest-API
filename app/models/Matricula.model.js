@@ -6,48 +6,60 @@ const Matricula = function (matricula) {
   this.cod = matricula.cod;
 };
 
-
 Matricula.create = (newMatricula, result) => {
-  sql.query("INSERT INTO matriculasED VALUES (" + newMatricula.ra + "," + newMatricula.cod +")", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    "INSERT INTO matriculasED VALUES (" +
+      newMatricula.ra +
+      "," +
+      newMatricula.cod +
+      ")",
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    console.log("created matricula: ", {
-      ra: res.insertRA,
-      ...newMatricula
-    });
-    result(null, {
-      id: res.insertRA,
-      ...newMatricula
-    });
-  });
+      console.log("created matricula: ", {
+        ra: res.insertRA,
+        ...newMatricula,
+      });
+      result(null, {
+        id: res.insertRA,
+        ...newMatricula,
+      });
+    }
+  );
 };
 
 Matricula.findByRA = (matriculaRA, cod, result) => {
-  sql.query(`SELECT * FROM matriculasED WHERE ra = ${matriculaRA} and cod = ${cod}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    `SELECT * FROM matriculasED WHERE ra = ${matriculaRA} and cod = ${cod}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    if (res.length) {
-      console.log("Matricula encontrado: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
+      if (res.length) {
+        console.log("Matricula encontrado: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
 
-    // Não achou a matricula com o ra
-    result({
-      kind: "not_found"
-    }, null);
-  });
+      // Não achou a matricula com o ra
+      result(
+        {
+          kind: "not_found",
+        },
+        null
+      );
+    }
+  );
 };
 
-Matricula.getAll = result => {
+Matricula.getAll = (result) => {
   sql.query("SELECT * FROM matriculasED", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -73,46 +85,55 @@ Matricula.updateByRA = (ra, matricula, result) => {
 
       if (res.affectedRows == 0) {
         // não achou a matricula com esse ra
-        result({
-          kind: "not_found"
-        }, null);
+        result(
+          {
+            kind: "not_found",
+          },
+          null
+        );
         return;
       }
 
       console.log("updated matricula: ", {
         id: id,
-        ...matricula
+        ...matricula,
       });
       result(null, {
         id: id,
-        ...matricula
+        ...matricula,
       });
     }
   );
 };
 
 Matricula.remove = (cod, ra, result) => {
-  sql.query("DELETE FROM matriculasED WHERE ra = "+ra+" and cod = "+cod, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-    console.log(res);
-    if (res.affectedRows == 0) {
-      // não achou o matricula com esse ra
-      result({
-        kind: "not_found"
-      }, null);
-      return;
-    }
+  sql.query(
+    "DELETE FROM matriculasED WHERE ra = " + ra + " and cod = " + cod,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log(res);
+      if (res.affectedRows == 0) {
+        // não achou o matricula com esse ra
+        result(
+          {
+            kind: "not_found",
+          },
+          null
+        );
+        return;
+      }
 
-    console.log("Matricula com ra: ", ra, " foi deletada");
-    result(null, res);
-  });
+      console.log("Matricula com ra: ", ra, " foi deletada");
+      result(null, res);
+    }
+  );
 };
 
-Matricula.removeAll = result => {
+Matricula.removeAll = (result) => {
   sql.query("DELETE FROM matriculasED", (err, res) => {
     if (err) {
       console.log("error: ", err);

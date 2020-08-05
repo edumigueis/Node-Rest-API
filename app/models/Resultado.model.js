@@ -4,7 +4,8 @@ const sql = require("./db.js");
 const Resultado = function (resultado) {
   this.ra = resultado.ra;
   this.nome = resultado.nome;
-  (this.nota = resultado.nota), (this.frequencia = resultado.frequencia);
+  this.nota = resultado.nota, 
+  this.frequencia = resultado.frequencia;
 };
 
 Resultado.create = (newResultado, result) => {
@@ -72,8 +73,8 @@ Resultado.getAll = (result) => {
       return;
     }
 
-    console.log("resultados: ", res);
-    result(null, res);
+    console.log("resultados: ", res.recordset);
+    result(null, res.recordset);
   });
 };
 

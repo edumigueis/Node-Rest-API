@@ -7,46 +7,60 @@ const Disciplina = function (disciplina) {
 };
 
 Disciplina.create = (newDisciplina, result) => {
-  sql.query("INSERT INTO disciplinas VALUES("+newDisciplina.cod+","+ newDisciplina.nome+")", newDisciplina, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    "INSERT INTO disciplinas VALUES(" +
+      newDisciplina.cod +
+      "," +
+      newDisciplina.nome +
+      ")",
+    newDisciplina,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    console.log("created disciplina: ", {
-      cod: res.insertRA,
-      ...newDisciplina
-    });
-    result(null, {
-      cod: res.insertRA,
-      ...newDisciplina
-    });
-  });
+      console.log("created disciplina: ", {
+        cod: res.insertRA,
+        ...newDisciplina,
+      });
+      result(null, {
+        cod: res.insertRA,
+        ...newDisciplina,
+      });
+    }
+  );
 };
 
 Disciplina.findByCod = (disciplinaCOD, result) => {
-  sql.query(`SELECT * FROM disciplinas WHERE cod = ${disciplinaCOD}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    `SELECT * FROM disciplinas WHERE cod = ${disciplinaCOD}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    if (res.length) {
-      console.log("Disciplina encontrada: ", res.recordset[0]);
-      result(null, res.recordset[0]);
-      return;
-    }
+      if (res.recordset.length > 0) {
+        console.log("Disciplina encontrada: ", res.recordset[0]);
+        result(null, res.recordset[0]);
+        return;
+      }
 
-    // Não achou a disciplina com o cod
-    result({
-      kind: "not_found"
-    }, null);
-  });
+      // Não achou a disciplina com o cod
+      result(
+        {
+          kind: "not_found",
+        },
+        null
+      );
+    }
+  );
 };
 
-Disciplina.getAll = result => {
+Disciplina.getAll = (result) => {
   sql.query("SELECT * FROM disciplinas", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -55,7 +69,7 @@ Disciplina.getAll = result => {
     }
 
     console.log("disciplinas: ", res);
-    result(null, res);
+    result(null, res.recordset);
   });
 };
 
@@ -72,19 +86,22 @@ Disciplina.updateByRA = (cod, disciplina, result) => {
 
       if (res.affectedRows == 0) {
         // não achou a disciplina com esse cod
-        result({
-          kind: "not_found"
-        }, null);
+        result(
+          {
+            kind: "not_found",
+          },
+          null
+        );
         return;
       }
 
       console.log("updated disciplina: ", {
         cod: cod,
-        ...disciplina
+        ...disciplina,
       });
       result(null, {
         cod: cod,
-        ...disciplina
+        ...disciplina,
       });
     }
   );
@@ -100,9 +117,12 @@ Disciplina.remove = (cod, result) => {
 
     if (res.affectedRows == 0) {
       // não achou a disciplina com esse cod
-      result({
-        kind: "not_found"
-      }, null);
+      result(
+        {
+          kind: "not_found",
+        },
+        null
+      );
       return;
     }
 
@@ -111,7 +131,7 @@ Disciplina.remove = (cod, result) => {
   });
 };
 
-Disciplina.removeAll = result => {
+Disciplina.removeAll = (result) => {
   sql.query("DELETE FROM disciplinas", (err, res) => {
     if (err) {
       console.log("error: ", err);

@@ -23,7 +23,7 @@ exports.create = (req, res) => {
       res.status(500).send({
         message: err.message || "Erro ao criar aluno."
       });
-    else res.send(data);
+    else res.send(data.recordset);
   });
 };
 
@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
       res.status(500).send({
         message: err.message || "Erro ao buscar alunos."
       });
-    else res.send(data);
+    else res.send(data.recordset);
   });
 };
 
@@ -51,7 +51,7 @@ exports.findOne = (req, res) => {
           message: "Erro ao busar o aluno com ra " + req.params.ra
         });
       }
-    } else res.send(data);
+    } else res.send(data.recordset);
   });
 };
 
@@ -78,7 +78,7 @@ exports.update = (req, res) => {
             message: "Erro ao atualizar aluno com ra " + req.params.ra
           });
         }
-      } else res.send(data);
+      } else res.send(data.recordset);
     }
   );
 };

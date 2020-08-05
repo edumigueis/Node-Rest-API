@@ -14,7 +14,7 @@ module.exports = app => {
   app.put("/matricula/:matriculaRA", matricula.update);
 
   // Deleta uma matricula com id especifico
-  app.delete("/matricula/:matriculaRA", matricula.delete);
+  app.delete("/matricula/:ra/:cod", matricula.delete);
 
   // Deleta todas as matriculas
   app.delete("/matricula", matricula.deleteAll);

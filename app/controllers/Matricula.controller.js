@@ -12,7 +12,7 @@ exports.create = (req, res) => {
   // Cria um Matricula
   const matricula = new Matricula({
     ra: req.body.ra,
-    cod: req.body.cod,
+    cod: req.body.cod
   });
 
   // Salva Matricula no banco de dados

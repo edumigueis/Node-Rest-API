@@ -26,8 +26,8 @@ Matricula.create = (newMatricula, result) => {
   });
 };
 
-Matricula.findByRA = (matriculaRA, result) => {
-  sql.query(`SELECT * FROM matriculas WHERE id = ${matriculaRA}`, (err, res) => {
+Matricula.findByRA = (matriculaRA, cod, result) => {
+  sql.query(`SELECT * FROM matriculasED WHERE ra = ${matriculaRA} and cod = ${cod}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -92,7 +92,7 @@ Matricula.updateByRA = (ra, matricula, result) => {
 };
 
 Matricula.remove = (cod, ra, result) => {
-  sql.query("DELETE FROM matriculas WHERE ra = ? and cod = ?", ra, cod, (err, res) => {
+  sql.query("DELETE FROM matriculasED WHERE ra = ? and cod = ?", ra, cod, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

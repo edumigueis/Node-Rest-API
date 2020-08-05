@@ -8,10 +8,10 @@ exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
     res.status(400).send({
-      message: "Conteúdo não pode estar vazio"
+      message: "Conteúdo não pode estar vazio",
     });
   }
-  
+
   // Cria um Resultado
   const resultado = new Resultado({
     ra: req.body.ra,
@@ -24,7 +24,16 @@ exports.create = (req, res) => {
   Aluno.findByRA(resultado.ra, (err, data) => {
     if (err) {
       res.status(500).send({
-        message: err.message || "Este aluno não existe."
+        message: err.message || "Este aluno não existe.",
+      });
+      return;
+    }
+  });
+
+  Disciplina.findByCod(resultado.cod, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "Esta disciplina não existe.",
       });
       return;
     }
@@ -33,19 +42,17 @@ exports.create = (req, res) => {
   Matricula.remove(resultado.cod, resultado.ra, (err, data) => {
     if (err) {
       res.status(500).send({
-        message: err.message || "Esta disciplina não existe."
+        message: err.message || "Esta matricula não existe.",
       });
       return;
     }
   });
 
-  /*Matricula.findByRA("")*/
-
   // Salva Resultado no banco de dados
   Resultado.create(resultado, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Erro ao criar resultado."
+        message: err.message || "Erro ao criar resultado.",
       });
     else res.send(data.recordset);
   });
@@ -56,7 +63,7 @@ exports.findAll = (req, res) => {
   Resultado.getAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Erro ao buscar resultados."
+        message: err.message || "Erro ao buscar resultados.",
       });
     else res.send(data.recordset);
   });
@@ -68,11 +75,11 @@ exports.findOne = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Não foi possível encontar o resultado com ra ${req.params.ra}.`
+          message: `Não foi possível encontar o resultado com ra ${req.params.ra}.`,
         });
       } else {
         res.status(500).send({
-          message: "Erro ao busar o resultado com ra " + req.params.ra
+          message: "Erro ao busar o resultado com ra " + req.params.ra,
         });
       }
     } else res.send(data.recordset);
@@ -84,27 +91,23 @@ exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
-      message: "Conteúdo não pode estar vazio!"
+      message: "Conteúdo não pode estar vazio!",
     });
   }
 
-  Resultado.updateByRA(
-    req.params.ra,
-    new Resultado(req.body),
-    (err, data) => {
-      if (err) {
-        if (err.kind === "not_found") {
-          res.status(404).send({
-            message: `Não foi possível encontrar resultado com ra ${req.params.ra}.`
-          });
-        } else {
-          res.status(500).send({
-            message: "Erro ao atualizar resultado com ra " + req.params.ra
-          });
-        }
-      } else res.send(data);
-    }
-  );
+  Resultado.updateByRA(req.params.ra, new Resultado(req.body), (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Não foi possível encontrar resultado com ra ${req.params.ra}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Erro ao atualizar resultado com ra " + req.params.ra,
+        });
+      }
+    } else res.send(data);
+  });
 };
 
 // Deleta resultado com ra especifico
@@ -113,16 +116,17 @@ exports.delete = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Não foi possível encontrar resultado com ra ${req.params.resultadoId}.`
+          message: `Não foi possível encontrar resultado com ra ${req.params.resultadoId}.`,
         });
       } else {
         res.status(500).send({
-          message: "Erro ao deletar resultado com ra " + req.params.resultadoId
+          message: "Erro ao deletar resultado com ra " + req.params.resultadoId,
         });
       }
-    } else res.send({
-      message: `Resultado foi deletado com sucesso!`
-    });
+    } else
+      res.send({
+        message: `Resultado foi deletado com sucesso!`,
+      });
   });
 };
 
@@ -131,10 +135,11 @@ exports.deleteAll = (req, res) => {
   Resultado.removeAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Algum erro ocorreu ao deletar os resultados"
+        message: err.message || "Algum erro ocorreu ao deletar os resultados",
       });
-    else res.send({
-      message: `Todos os resultados deletados com sucesso!`
-    });
+    else
+      res.send({
+        message: `Todos os resultados deletados com sucesso!`,
+      });
   });
 };

@@ -5,7 +5,7 @@ const Resultado = function (resultado) {
   this.ra = resultado.ra;
   this.nome = resultado.nome;
   this.nota = resultado.nota,
-    this.frequencia = resultado.frequencia
+  this.frequencia = resultado.frequencia
 };
 
 Resultado.create = (newResultado, result) => {

@@ -31,6 +31,3 @@ select * from AlunosED
 select * from Disciplinas	
 select * from MatriculasED	
 select * from Resultados	
-
-
-						

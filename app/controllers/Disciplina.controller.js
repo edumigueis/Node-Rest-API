@@ -38,15 +38,15 @@ exports.findAll = (req, res) => {
 
 // Achar disciplina com cod especifico
 exports.findOne = (req, res) => {
-  Disciplina.findByCod(req.params.cod, (err, data) => {
+  Disciplina.findByCod(req.params.disciplinaCOD, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Não foi possível encontar o disciplina com cod ${req.params.cod}.`
+          message: `Não foi possível encontar o disciplina com cod ${req.params.disciplinaCOD}.`
         });
       } else {
         res.status(500).send({
-          message: "Erro ao buscar o disciplina com cod " + req.params.cod
+          message: "Erro ao buscar o disciplina com cod " + req.params.disciplinaCOD
         });
       }
     } else res.send(data.recordset);

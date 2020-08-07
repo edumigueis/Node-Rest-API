@@ -42,9 +42,9 @@ Matricula.findByRA = (matriculaRA, cod, result) => {
         return;
       }
 
-      if (res.length > 0) {
-        console.log("Matricula encontrado: ", res[0]);
-        result(null, res[0]);
+      if (res.recordset.length > 0) {
+        console.log("Matricula encontrado: ", res.recordset[0]);
+        result(null, res.recordset[0]);
         return;
       }
 

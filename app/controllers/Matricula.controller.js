@@ -38,15 +38,15 @@ exports.findAll = (req, res) => {
 
 // Achar matricula com ra especifico
 exports.findOne = (req, res) => {
-  Matricula.findById(req.params.ra, (err, data) => {
+  Matricula.findById(req.params.matriculaRA, req.params.cod, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Não foi possível encontar o matricula com ra ${req.params.ra}.`
+          message: `Não foi possível encontar o matricula com ra ${req.params.matriculaRA}.`
         });
       } else {
         res.status(500).send({
-          message: "Erro ao busar o matricula com ra " + req.params.ra
+          message: "Erro ao busar o matricula com ra " + req.params.matriculaRA
         });
       }
     } else res.send(data.recordset);

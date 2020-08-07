@@ -8,7 +8,7 @@ module.exports = app => {
   app.get("/matricula", matricula.findAll);
 
   //Busca uma matricula com id especifico
-  app.get("/matricula/:matriculaRA", matricula.findOne);
+  app.get("/matricula/:matriculaRA/:cod", matricula.findOne);
 
   // Altera uma matricula com id especifico
   app.put("/matricula/:matriculaRA", matricula.update);

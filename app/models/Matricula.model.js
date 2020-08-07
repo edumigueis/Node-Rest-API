@@ -108,16 +108,14 @@ Matricula.updateByRA = (ra, matricula, result) => {
 
 Matricula.remove = (cod, ra, result) => {
   sql.query(
-    "DELETE FROM matriculasED WHERE ra = " + ra + " and cod = " + cod,
-    (err, res) => {
+    "DELETE FROM matriculasED WHERE ra = " + ra + " and cod = " + cod, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log(res);
-      if (res.affectedRows == 0) {
-        // não achou o matricula com esse ra
+
+      if (res.rowsAffected == 0) {
         result(
           {
             kind: "not_found",
@@ -128,7 +126,7 @@ Matricula.remove = (cod, ra, result) => {
       }
 
       console.log("Matricula com ra: ", ra, " foi deletada");
-      result(null, res);
+      result(null);
     }
   );
 };

@@ -44,8 +44,8 @@ Disciplina.findByCod = (disciplinaCOD, result) => {
       }
 
       if (res.recordset.length > 0) {
-        console.log("Disciplina encontrada: ", res.recordset[0]);
-        result(null, res.recordset[0]);
+        console.log("Disciplina encontrada: ", res);
+        result(null, res);
         return;
       }
 

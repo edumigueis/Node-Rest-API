@@ -3,21 +3,21 @@ const sql = require("./db.js");
 // Construtor
 const Resultado = function (resultado) {
   this.ra = resultado.ra;
-  this.nome = resultado.nome;
-  this.nota = resultado.nota, 
+  this.nota = resultado.nota;
+  this.cod = resultado.cod, 
   this.frequencia = resultado.frequencia;
 };
 
 Resultado.create = (newResultado, result) => {
   sql.query(
-    "INSERT INTO resultados (" +
+    "INSERT INTO resultados VALUES (" +
       newResultado.ra +
       "," +
-      newResultado.nome +
+      newResultado.cod +
       "," +
       newResultado.nota +
       "," +
-      newResultado.frquencia +
+      newResultado.frequencia +
       ")",
     (err, res) => {
       if (err) {
@@ -26,14 +26,8 @@ Resultado.create = (newResultado, result) => {
         return;
       }
 
-      console.log("created resultado: ", {
-        ra: res.insertRA,
-        ...newResultado,
-      });
-      result(null, {
-        id: res.insertRA,
-        ...newResultado,
-      });
+      console.log("created resultado");
+      result(null);
     }
   );
 };

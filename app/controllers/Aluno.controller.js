@@ -13,8 +13,8 @@ exports.create = (req, res) => {
 
   // Cria um Aluno
   const aluno = new Aluno({
-    ra: req.body.ra,
-    nome: req.body.nome,
+    ra: req.body.RA,
+    nome: req.body.Nome,
   });
 
   // Salva Aluno no banco de dados

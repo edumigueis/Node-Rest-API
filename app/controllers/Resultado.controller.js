@@ -3,7 +3,6 @@ const Matricula = require("../models/Matricula.model.js");
 const Aluno = require("../models/Aluno.model.js");
 const Disciplina = require("../models/Disciplina.model.js");
 
-// Cria e salva um novo resultado
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -12,13 +11,11 @@ exports.create = (req, res) => {
     });
   }
 
-  // Cria um Resultado
   const resultado = new Resultado({
-    ra: req.body.ra,
-    nome: req.body.nome,
-    nota: req.body.nota,
-    frequencia: req.body.frequencia,
-    cod: req.body.cod,
+    ra: req.body.RA,
+    nota: req.body.Nota,
+    cod: req.body.Cod,
+    frequencia: req.body.Frequencia,
   });
 
   Aluno.findByRA(resultado.ra, (err, data) => {
@@ -26,39 +23,37 @@ exports.create = (req, res) => {
       res.status(500).send({
         message: err.message || "Este aluno não existe.",
       });
-      return;
     }
-  });
-
-  Disciplina.findByCod(resultado.cod, (err, data) => {
-    if (err) {
-      res.status(500).send({
-        message: err.message || "Esta disciplina não existe.",
-      });
-      return;
+    else {
+      Disciplina.findByCod(resultado.cod, (err, data) => {
+        if (err) {
+          res.status(500).send({
+            message: err.message || "Esta disciplina não existe.",
+          });
+        }
+        else {
+          Matricula.remove(resultado.cod, resultado.ra, (err, data) => {
+            if (err) {
+              res.status(500).send({
+                message: err.message || "Esta matricula não existe.",
+              });
+            }
+            else {
+              Resultado.create(resultado, (err, data) => {
+                if (err)
+                  res.status(500).send({
+                    message: err.message || "Erro ao criar resultado.",
+                  });
+                else res.sendStatus(200);
+              });
+            }
+          })
+        }
+      })
     }
-  });
+  })
+}
 
-  Matricula.remove(resultado.cod, resultado.ra, (err, data) => {
-    if (err) {
-      res.status(500).send({
-        message: err.message || "Esta matricula não existe.",
-      });
-      return;
-    }
-  });
-
-  // Salva Resultado no banco de dados
-  Resultado.create(resultado, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message: err.message || "Erro ao criar resultado.",
-      });
-    else res.send(data.recordset);
-  });
-};
-
-// Pega todos os resultados do banco de dados
 exports.findAll = (req, res) => {
   Resultado.getAll((err, data) => {
     if (err)
@@ -69,7 +64,6 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Achar resultado com ra especifico
 exports.findOne = (req, res) => {
   Resultado.findById(req.params.ra, (err, data) => {
     if (err) {
@@ -86,9 +80,7 @@ exports.findOne = (req, res) => {
   });
 };
 
-// Altera o resultado com ra específico
 exports.update = (req, res) => {
-  // Validate Request
   if (!req.body) {
     res.status(400).send({
       message: "Conteúdo não pode estar vazio!",
@@ -110,7 +102,6 @@ exports.update = (req, res) => {
   });
 };
 
-// Deleta resultado com ra especifico
 exports.delete = (req, res) => {
   Resultado.remove(req.params.ra, (err, data) => {
     if (err) {
@@ -130,7 +121,6 @@ exports.delete = (req, res) => {
   });
 };
 
-// Delete todos os resultados do banco
 exports.deleteAll = (req, res) => {
   Resultado.removeAll((err, data) => {
     if (err)

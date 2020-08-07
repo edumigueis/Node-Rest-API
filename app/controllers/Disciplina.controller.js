@@ -11,8 +11,8 @@ exports.create = (req, res) => {
 
   // Cria um Disciplina
   const disciplina = new Disciplina({
-    cod: req.body.cod,
-    nome: req.body.nome,
+    cod: req.body.Cod,
+    nome: req.body.Nome,
   });
 
   // Salva Disciplina no banco de dados

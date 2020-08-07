@@ -49,7 +49,7 @@ exports.findOne = (req, res) => {
           message: "Erro ao busar o matricula com ra " + req.params.matriculaRA
         });
       }
-    } else res.send(data.recordset);
+    } else res.send(data);
   });
 };
 

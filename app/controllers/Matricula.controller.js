@@ -38,7 +38,7 @@ exports.findAll = (req, res) => {
 
 // Achar matricula com ra especifico
 exports.findOne = (req, res) => {
-  Matricula.findById(req.params.matriculaRA, req.params.cod, (err, data) => {
+  Matricula.findByRA(req.params.matriculaRA, req.params.cod, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

@@ -44,7 +44,7 @@ Resultado.findById = (ra, cod, result) => {
 
       if (res.recordset.length > 0) {
         console.log("Resultado encontrado: ", res[0]);
-        result(null, res[0]);
+        result(null, res[0].recordset);
         return;
       }
 

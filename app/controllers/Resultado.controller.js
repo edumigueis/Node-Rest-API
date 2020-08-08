@@ -65,7 +65,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  Resultado.findById(req.params.ra, (err, data) => {
+  Resultado.findById(req.params.ra, req.params.cod, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

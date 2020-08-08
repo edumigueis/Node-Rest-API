@@ -32,9 +32,9 @@ Resultado.create = (newResultado, result) => {
   );
 };
 
-Resultado.findByRA = (resultadoRA, result) => {
+Resultado.findById = (ra, cod, result) => {
   sql.query(
-    `SELECT * FROM resultados WHERE id = ${resultadoRA}`,
+    `SELECT * FROM resultados WHERE ra = ${ra} and cod = ${cod}`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -42,7 +42,7 @@ Resultado.findByRA = (resultadoRA, result) => {
         return;
       }
 
-      if (res.length) {
+      if (res.recordset.length > 0) {
         console.log("Resultado encontrado: ", res[0]);
         result(null, res[0]);
         return;

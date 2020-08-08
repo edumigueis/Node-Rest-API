@@ -8,7 +8,7 @@ module.exports = app => {
   app.get("/resultado", resultado.findAll);
 
   //Busca um resultado com id especifico
-  app.get("/resultado/:resultadoRA", resultado.findOne);
+  app.get("/resultado/:ra/:cod", resultado.findOne);
 
   // Altera um resultado com id especifico
   app.put("/resultado/:resultadoRA", resultado.update);

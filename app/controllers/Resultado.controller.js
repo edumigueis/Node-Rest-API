@@ -44,7 +44,8 @@ exports.create = (req, res) => {
                   res.status(500).send({
                     message: err.message || "Erro ao criar resultado.",
                   });
-                else res.sendStatus(200);
+                else 
+                res.sendStatus(200);
               });
             }
           })
